@@ -1,7 +1,7 @@
 import os
 import sys
 from dataclasses import dataclass
-from urllib.parse import urlparse
+import dagshub
 import mlflow
 import mlflow.sklearn
 import numpy as np
@@ -25,6 +25,12 @@ from src.mlproject.utils import save_object,evaluate_models
 @dataclass
 class ModelTrainerConfig:
     trained_model_file_path=os.path.join("artifact","model.pkl")
+
+dagshub.init(
+    repo_owner="GauravBidaeet",
+    repo_name="Data-science-project",
+    mlflow=True
+)
 
 class ModelTrainer:
     def __init__(self):
@@ -101,6 +107,44 @@ class ModelTrainer:
                 list(model_report.values()).index(best_model_score)
             ]
             best_model = models[best_model_name]
+
+            print("This is the best model:")
+            print(best_model_name)
+
+            model_names = list(params.keys())
+
+            actual_model = ""
+
+            for model in model_names:
+                if best_model_name == model:
+                    actual_model = actual_model+model
+
+            best_params = params[actual_model]
+
+
+            #mlflow
+            with mlflow.start_run():
+
+                predicted_qualities = best_model.predict(X_test)
+
+                rmse, mae, r2 = self.eval_metrics(
+                    y_test,
+                    predicted_qualities
+                )
+
+                # Log parameters
+                mlflow.log_params(best_params)
+
+                # Log metrics
+                mlflow.log_metric("rmse", rmse)
+                mlflow.log_metric("mae", mae)
+                mlflow.log_metric("r2", r2)
+
+                # Log model
+                mlflow.sklearn.log_model(
+                    best_model,
+                    "model"
+                )
 
             if best_model_score<0.6:
                 raise CustomException("No best model found")
