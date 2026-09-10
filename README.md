@@ -130,4 +130,60 @@ DVC helps separate large datasets and generated artifacts from Git source-code v
 ``bash``
   git clone https://github.com/GauravBidaeet/Data-science-project.git
   cd Data-science-project
+
+2. Create a virtual environment
+   
 ``bash``
+   python -m venv venv
+   
+Activate it on Windows:
+``bash``
+   venv\Scripts\activate
+
+3. Install dependencies
+   
+``bash``
+   pip install -r requirements.txt
+
+4. Install the project
+
+``bash``
+   pip install -e .
+
+5. Running the Project
+``bash``
+   python app.py
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+🧪 Reproducibility
+
+The project is structured around reproducible machine learning workflows using:
+
+Git
+DVC
+MLflow
+DagsHub
+Modular Python source code
+Docker
+
+This makes it possible to track changes to the code, data, experiments, and trained model artifacts.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+🛠️ Tech Stack
+
+Programming: Python
+
+Data Science: Pandas, NumPy, Matplotlib, Seaborn
+
+Machine Learning: Scikit-learn, CatBoosting Regressor, XGBRegressor, Random Forest, Decision Tree, Gradient Boosting, Gradient Boosting, Linear Regression, AdaBoost Regressor
+
+MLOps: MLflow, DagsHub, DVC
+
+Development: Jupyter Notebook, Git, GitHub
+
+Deployment: Docker
+
+
+
