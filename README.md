@@ -49,6 +49,7 @@ are derived from the subject-level scores.
 
 ## 🏗️ Project Architecture
 
+![Architecture](project_architecture.png)
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
